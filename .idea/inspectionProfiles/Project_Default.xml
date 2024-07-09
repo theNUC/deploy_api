@@ -1,0 +1,73 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="CssUnknownProperty" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myCustomPropertiesEnabled" value="true" />
+      <option name="myIgnoreVendorSpecificProperties" value="false" />
+      <option name="myCustomPropertiesList">
+        <value>
+          <list size="5">
+            <item index="0" class="java.lang.String" itemvalue="transform" />
+            <item index="1" class="java.lang.String" itemvalue="flex-item-align" />
+            <item index="2" class="java.lang.String" itemvalue="display" />
+            <item index="3" class="java.lang.String" itemvalue="-display" />
+            <item index="4" class="java.lang.String" itemvalue="flex-negative" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="13">
+            <item index="0" class="java.lang.String" itemvalue="nobr" />
+            <item index="1" class="java.lang.String" itemvalue="noembed" />
+            <item index="2" class="java.lang.String" itemvalue="comment" />
+            <item index="3" class="java.lang.String" itemvalue="noscript" />
+            <item index="4" class="java.lang.String" itemvalue="embed" />
+            <item index="5" class="java.lang.String" itemvalue="script" />
+            <item index="6" class="java.lang.String" itemvalue="img" />
+            <item index="7" class="java.lang.String" itemvalue="div" />
+            <item index="8" class="java.lang.String" itemvalue="body" />
+            <item index="9" class="java.lang.String" itemvalue="html" />
+            <item index="10" class="java.lang.String" itemvalue="class" />
+            <item index="11" class="java.lang.String" itemvalue="content" />
+            <item index="12" class="java.lang.String" itemvalue="p" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="16">
+            <item index="0" class="java.lang.String" itemvalue="typing_extensions" />
+            <item index="1" class="java.lang.String" itemvalue="modeltranslation" />
+            <item index="2" class="java.lang.String" itemvalue="pyTelegramBotAPI" />
+            <item index="3" class="java.lang.String" itemvalue="psycopg2" />
+            <item index="4" class="java.lang.String" itemvalue="psycopg2-binary" />
+            <item index="5" class="java.lang.String" itemvalue="asgiref" />
+            <item index="6" class="java.lang.String" itemvalue="requests" />
+            <item index="7" class="java.lang.String" itemvalue="django-cuser" />
+            <item index="8" class="java.lang.String" itemvalue="Django" />
+            <item index="9" class="java.lang.String" itemvalue="django-tinymce" />
+            <item index="10" class="java.lang.String" itemvalue="charset-normalizer" />
+            <item index="11" class="java.lang.String" itemvalue="pillow" />
+            <item index="12" class="java.lang.String" itemvalue="soupsieve" />
+            <item index="13" class="java.lang.String" itemvalue="urllib3" />
+            <item index="14" class="java.lang.String" itemvalue="cuser" />
+            <item index="15" class="java.lang.String" itemvalue="pyserial" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="str.*" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
