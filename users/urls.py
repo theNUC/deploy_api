@@ -1,17 +1,21 @@
 from django.urls import path
-from users.views import LoginView, SignUpView, VerifyCodeView, UpdateUserAPIView, UpdateUserAvatarAPIView, LogoutView, \
-    RefreshTokenView, UserListView
+from users.views import (
+    SignUpCreateAPIView, CodeVerifiedAPIView,
+    ResendVerifyCodeAPIView,
+    UserUpdateAPIView, UpdateAvatarAPIView,
+    LoginView, LogoutView, RefreshTokenView, ForgetPasswordView
+)
 
 app_name = 'users'
 
 urlpatterns = [
-    path('register/', SignUpView.as_view(), name='user-register'),
-    path('verify/', VerifyCodeView.as_view(), name='user-verify'),
-    path('login/', LoginView.as_view(), name='user-login'),
-    path('update/', UpdateUserAPIView.as_view(), name='update'),
-    path('avatar-update/', UpdateUserAvatarAPIView.as_view(), name='avatar'),
+    path('register/', SignUpCreateAPIView.as_view(), name='register'),
+    path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
-    path('refresh/', RefreshTokenView.as_view(), name='refresh'),
-
-    path('myself/', UserListView.as_view(), name='user-list'),
+    path('refresh/token/', RefreshTokenView.as_view(), name='refresh'),
+    path('verify/', CodeVerifiedAPIView.as_view(), name='verify'),
+    path('verify/resend/', ResendVerifyCodeAPIView.as_view(), name='verify-resend'),
+    path('update/', UserUpdateAPIView.as_view(), name='update'),
+    path('update/avatar/', UpdateAvatarAPIView.as_view(), name='update-avatar'),
+    path('forget/password/', ForgetPasswordView.as_view(), name='forget-password'),
 ]

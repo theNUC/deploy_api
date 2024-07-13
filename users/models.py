@@ -1,22 +1,20 @@
 import uuid
-from datetime import timedelta
 import random
-
-from django.contrib.auth.models import AbstractUser, User
-from django.utils import timezone
-from rest_framework_simplejwt.tokens import RefreshToken
-
-from shared.models import BaseModel
 from django.db import models
+from datetime import timedelta
+from django.utils import timezone
+from shared.models import BaseModel
+from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib.auth.models import AbstractUser, User
 
-VIA_EMAIL = "VIA_EMAIL"
+VIA_EMAIL, VIA_PHONE = "VIA_EMAIL", "VIA_PHONE"
 ORDINARY_USER, MANAGER, ADMIN = "ORDINARY_USER", "MANAGER", "ADMIN"
 NEW, CODE_VERIFIED, DONE, PHOTO = "NEW", "CODE_VERIFIED", "DONE", "PHOTO"
-
 
 class UserModel(AbstractUser, BaseModel):
     AUTH_TYPES = (
         (VIA_EMAIL, VIA_EMAIL),
+        (VIA_PHONE, VIA_PHONE)
     )
 
     AUTH_STATUSES = (
@@ -34,14 +32,14 @@ class UserModel(AbstractUser, BaseModel):
 
     auth_type = models.CharField(max_length=128, choices=AUTH_TYPES, default=VIA_EMAIL)
     auth_status = models.CharField(max_length=128, choices=AUTH_STATUSES, default=NEW)
-    user_role = models.CharField(max_length=128, choices=USER_ROLES, default=ORDINARY_USER)
-    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
-
     email = models.EmailField(null=True, blank=True)
     bio = models.TextField(null=True, blank=True)
+    phone_number = models.CharField(max_length=13, null=True, blank=True)
+    user_role = models.CharField(max_length=128, choices=USER_ROLES, default=ORDINARY_USER)
+    avatar = models.ImageField(upload_to='avatars', null=True, blank=True)
 
     def __str__(self):
-        return self.get_full_name()
+        return self.username
 
     @property
     def full_name(self):
@@ -55,7 +53,7 @@ class UserModel(AbstractUser, BaseModel):
             self.username = temp_username
 
     def check_pass(self):
-        if self.password:
+        if not self.password:
             self.password = f"password-{uuid.uuid4()}"
 
     def check_email(self):
@@ -93,19 +91,15 @@ class UserModel(AbstractUser, BaseModel):
         }
         return response
 
-    EMAIL_EXPIRATION_TIME = 4
-    PHONE_EXPIRATION_TIME = 2
 
-    class Meta:
-        ordering = ('email',)
-        verbose_name = 'User Profile'
-        verbose_name_plural = 'User Profiles'
+EMAIL_EXPIRATION_TIME = 4
+PHONE_EXPIRATION_TIME = 2
 
 
 class ConfirmationModel(BaseModel):
-    objects = None
     VERIFY_TYPES = (
         (VIA_EMAIL, VIA_EMAIL),
+        (VIA_PHONE, VIA_PHONE)
     )
 
     verify_type = models.CharField(max_length=128, choices=VERIFY_TYPES, default=VIA_EMAIL)
@@ -118,4 +112,6 @@ class ConfirmationModel(BaseModel):
         if not self.pk:
             if self.verify_type == VIA_EMAIL:
                 self.expiration_time = timezone.now() + timedelta(minutes=EMAIL_EXPIRATION_TIME)
+            else:
+                self.expiration_time = timezone.now() + timedelta(minutes=PHONE_EXPIRATION_TIME)
         super(ConfirmationModel, self).save(*args, **kwargs)

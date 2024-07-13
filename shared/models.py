@@ -1,8 +1,7 @@
-from django.db import models
 import uuid
+from django.db import models
 
 
-# Create your models here.
 class BaseModel(models.Model):
     uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     created_at = models.DateTimeField(auto_now_add=True)
